@@ -1,0 +1,42 @@
+.largebox{
+	border: black solid;
+	height: 500px;
+}
+
+.smallbox{
+	margin: 200px;
+	text-align: center;
+	height: 100px;
+}
+
+.homepageTitle{
+
+	
+	text-align: center;
+}
+
+.homepageButtons{
+	font-size: 24px;
+	size: 200%;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.list-group-item {
+
+	width: 100px;
+}
+
+#dayHeader{
+
+	display: inline-block;
+}
+#timePicker{
+	width: 85px;
+	display: inline-block;
+}
+
+#smallForm{
+
+	width: 10px;
+}
