@@ -66,6 +66,8 @@ class ScheduleTable extends Component{
 
     
     console.log('hello');
+    this.setState({rows: this.state.rows - 1})
+    
   }
 
 }
