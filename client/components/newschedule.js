@@ -4,6 +4,7 @@ import ScheduleTable from './schedule/scheduletable';
 import AddEmployees from './employees/addemployees';
 import FullEmployeeList from './employees/employee_list';
 import FinishedTabs from './navigation/tabs.js';
+import HourTotals from './hours/hourtotals';
 
 class NewSchedule extends Component{
 
@@ -130,6 +131,11 @@ class NewSchedule extends Component{
 
 			
 
+
+
+			</div>
+			<div>
+			<HourTotals />
 
 
 			</div>

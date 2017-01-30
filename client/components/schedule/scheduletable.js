@@ -6,13 +6,16 @@ import Datetime from 'react-datetime';
 import ScheduleTableRow from './scheduletablerow';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
+import TechDropdown from './table_components/techdropdown';
+import AdminTable from './adminTable';
+
 
 class ScheduleTable extends Component{
 
   constructor(props){
 
     super(props);
-    this.state = {rows: 0};
+    this.state = {rows: 15};
   }
 
   
@@ -76,9 +79,16 @@ class FullTable extends Component{
   render(){
 
     return(
+    <div>
+    <ul className="nav nav-tabs">
+      <li className="active"><a data-toggle="tab" href="#Operator">Operators</a></li>
+      <li><a data-toggle="tab" href="#Admins">Admins</a></li>
+      <li><a data-toggle="tab" href="#BackWall">BackWall</a></li>
 
-    <div className="table-responsive">
-        <table className="table table-striped" id="mainTable">
+    </ul>
+    <div className="tab-content">
+    <div id="Operator" className="table-responsive tab-pane fad in active">
+        <table className="table table-sm" id="mainTable">
           <thead>
                   <tr>
                     <th>Time (ET)</th>
@@ -105,6 +115,11 @@ class FullTable extends Component{
         {/*<input id="filename" type="file"/>
         <button className="btn btn-primary" type="submit" onClick={this.uploadFile}>Upload</button>
         <button className="btn btn-primary" type="submit" onClick={this.inputData}>Input Data</button>*/}
+      </div>
+
+      <div className="tab-pane fade" id="Admins"><AdminTable /></div>
+      <div className="tab-pane fade" id="BackWall">Backwall</div>
+      </div>
       </div>
     
   );
@@ -134,9 +149,11 @@ class ExtraRow extends Component{
                 <input placeholder="Umpire"></input>
               </td>
                <td>
-                <input list="techs" type="text" name="tech" className = "tech" placeholder="Tech" size="11"></input>
+
+               <TechDropdown />
+                {/*<input list="techs" type="text" name="tech" className = "tech" placeholder="Tech" size="11"></input>
                   <datalist id="techs">
-                  </datalist>
+                  </datalist>*/}
 
               </td>
                <td>
