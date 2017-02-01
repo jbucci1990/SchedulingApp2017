@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+	import React, {Component} from 'react';
 import {createContainer} from 'meteor/react-meteor-data';
 import {EmployeeList} from '../../../imports/collections/employeelist';
 
@@ -74,7 +74,7 @@ class AddEmployees extends Component {
 		return(
 			<div className="container-fluid">
 			<div className="row">
-			<div className="col-md-4">
+			<div id="addemployeeDiv" className="col-md-4">
 
 				<label>Add Operator</label>
 				<form id="addEmpForm"> 
@@ -90,13 +90,13 @@ class AddEmployees extends Component {
 				<FullEmployeeList />
 				
 			</div>
-			<div className="col-md-4">
+			<div id="addemployeeDiv" className="col-md-4">
 
 				<AddAdmins />
 				<FullAdminList />
 				
 			</div>
-			<div className="col-md-4">
+			<div id="addemployeeDiv" className="col-md-4">
 
 				<AddFullTime />
 				<FullStaffList />

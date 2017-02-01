@@ -3,49 +3,165 @@ import {createContainer} from 'meteor/react-meteor-data';
 import Datetime from 'react-datetime';
 
 
-class AdminTable extends Component {
+import ScheduleTableRow from './scheduletablerow';
+import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
-	render(){
+import TechDropdown from './table_components/techdropdown';
+import AdminTable from './adminTable';
 
 
+class AdminScheduleTable extends Component{
 
-		return(
+  constructor(props){
 
-			<div>
-				
+    super(props);
+    this.state = {rows: 4};
+  }
 
-				<div className="table-responsive tab-pane fad in active">
-        <table className="table table-sm" id="mainTable">
+  
+  inputData(event){
+
+    event.preventDefault();
+    this.props.schedule.map((row) => {
+      
+      console.log(row);
+      
+    });
+  }
+
+  uploadFile(event) {
+
+    event.preventDefault();
+
+      console.log("shit");
+      const fileVal=document.getElementById("filename");
+      
+       Meteor.call('importexcel', fileVal.value);
+      // Meteor.call('upload.schedule', "shit")
+    
+    }
+
+  render(){
+    console.log(this.state.rows);
+    const children = [];
+
+    for (var i = 0; i < this.state.rows; i++){
+
+      children.push(<AdminExtraRow removeChild={this.deleteRow.bind(this)} number={i} key={i} />);
+    };
+
+    return(
+      <AdminFullTable addChild={this.onAddRow.bind(this)} >
+        {children}
+        </AdminFullTable>
+
+      
+      );
+
+
+  }
+  onAddRow(){
+
+    this.setState({rows:this.state.rows + 1})
+  }
+
+  deleteRow(){
+
+    
+    console.log('hello');
+    this.setState({rows: this.state.rows - 1})
+    
+  }
+
+}
+
+class AdminFullTable extends Component{
+  render(){
+
+    return(
+    <div>
+    
+    <div className="tab-content">
+    <div id="Operator" className="table-responsive">
+        <table className="table table-condensed" id="mainTable">
           <thead>
                   <tr>
-                   
-                      <th> Tech </th>             
-                      <th> Shift Time </th>
-                      
+                    <th>Day</th>
+                    <th>Admin</th>
+                    <th>Shift</th>
+                     
 
                   </tr>
                 </thead>
 
                 <tbody className ="tbod">
-
-                	<tr>
-                		
-                		<td><input placeholder="Tech"></input></td>
-                		<td><input placeholder="Time"></input></td>
-                	</tr>
-                  	
+                  <AdminExtraRow />
+                  {this.props.children}
 
 
 
           </tbody>
         </table>
-			</div>
-			</div>
+
+        <button className="btn btn-primary" id="add" type="submit" onClick={this.props.addChild}>Add Shift</button>
+        {/*<input id="filename" type="file"/>
+        <button className="btn btn-primary" type="submit" onClick={this.uploadFile}>Upload</button>
+        <button className="btn btn-primary" type="submit" onClick={this.inputData}>Input Data</button>*/}
+      </div>
+
+      </div>
+      </div>
+    
+  );
+  }
 
 
-			)
-	}
 }
 
+class AdminExtraRow extends Component{
+  render(){
 
-export default AdminTable;
+    return(
+
+      <tr>
+
+              <td >
+                
+                  <input id="day" placeholder="Day"></input>
+              </td>
+
+              
+               <td >
+
+               <TechDropdown />
+
+              </td>
+               <td>
+                <div id="timePicker">
+                  <Datetime dateFormat={false} input={true}/>
+                </div>
+                <div id="timePicker">
+                  <Datetime dateFormat={false} input={true}/>
+                  <span id='hours'>##</span>
+                </div>
+
+              </td>
+              
+              <td>
+                <button className="btn" id="delete" type="delete" onClick={this.props.removeChild}>Delete</button>
+              </td>
+            </tr>
+
+      );
+  }
+
+
+}
+
+export default createContainer(() => {
+  Meteor.subscribe('uploadedschedule');
+
+    return {schedule: UploadedSchedule.find({}).fetch()};
+
+
+  }, AdminScheduleTable);

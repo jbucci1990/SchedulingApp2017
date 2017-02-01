@@ -45,5 +45,42 @@
 
 	border: solid;
 	border-color: grey;
+	height: 75px;
+	overflow-y: auto;
 		
+}
+
+.panel-heading{
+
+	height:40px;
+}
+#addemployeeDiv{
+
+	border: solid grey 4px;
+}
+#schedule{
+	height: 500px;
+	overflow-y: auto;
+		
+}
+
+#todaysDate{
+	float: right;
+}
+#glyph-remove{
+	float:right;
+}
+
+#hours{
+	float: right;
+}
+
+
+#day, #station, #time{
+	width: 80px;
+}
+
+#visit, #home, #umpire{
+
+	width: 100px;
 }

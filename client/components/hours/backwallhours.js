@@ -22,6 +22,26 @@ class BackWallHours extends Component{
 							<td>Hours 1</td>
 
 						</tr>
+						<tr>
+							<td>Operator 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Operator 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Operator 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Operator 1</td>
+							<td>Hours 1</td>
+
+						</tr>
 					</tbody>
 
 				</table>

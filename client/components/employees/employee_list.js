@@ -24,7 +24,7 @@ class FullEmployeeList extends Component {
 			return (
 				<li className='list-group-item' key={employeeName}>
 
-				<div>{employeeName}</div>
+				<div>{employeeName}<span id="glyph-remove" className="glyphicon glyphicon-remove"></span></div>
 				</li>
 				);
 		});

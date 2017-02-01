@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link, browserHistory} from 'react-router';
+import Datetime from 'react-datetime';
 
 class Header extends Component{
 
@@ -27,7 +28,14 @@ class Header extends Component{
 	}
 
 	render() {
+		var newDate = new Date();
+		var month = newDate.getUTCMonth() + 1;
+		var day = newDate.getUTCDate();
+		var year = newDate.getUTCFullYear();
 
+		fullDate = month + '/' + day + '/' + year;
+
+		console.log(newDate);
 
 		return(
 			<nav className="navbar navbar-default">
@@ -47,7 +55,7 @@ class Header extends Component{
 					<a href="#" onClick={this.AddEmployees.bind(this)}>Add Employees</a>
 				</li>
 			</ul>
-			
+			<h3 id="todaysDate">{fullDate}</h3>
 			</nav>
 
 

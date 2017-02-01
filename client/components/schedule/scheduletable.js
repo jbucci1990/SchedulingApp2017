@@ -7,7 +7,6 @@ import ScheduleTableRow from './scheduletablerow';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
 import TechDropdown from './table_components/techdropdown';
-import AdminTable from './adminTable';
 
 
 class ScheduleTable extends Component{
@@ -51,9 +50,13 @@ class ScheduleTable extends Component{
     };
 
     return(
+      <div>
       <FullTable addChild={this.onAddRow.bind(this)} >
         {children}
         </FullTable>
+        
+      
+      </div>
 
 			
 			);
@@ -80,17 +83,13 @@ class FullTable extends Component{
 
     return(
     <div>
-    <ul className="nav nav-tabs">
-      <li className="active"><a data-toggle="tab" href="#Operator">Operators</a></li>
-      <li><a data-toggle="tab" href="#Admins">Admins</a></li>
-      <li><a data-toggle="tab" href="#BackWall">BackWall</a></li>
-
-    </ul>
+    
     <div className="tab-content">
-    <div id="Operator" className="table-responsive tab-pane fad in active">
-        <table className="table table-sm" id="mainTable">
+    <div id="Operator" className="table-responsive">
+        <table className="table table-condensed" id="mainTable">
           <thead>
                   <tr>
+                    <th>Day</th>
                     <th>Time (ET)</th>
                       <th>Visit Team</th>
                       <th>Home Team</th>      
@@ -117,8 +116,6 @@ class FullTable extends Component{
         <button className="btn btn-primary" type="submit" onClick={this.inputData}>Input Data</button>*/}
       </div>
 
-      <div className="tab-pane fade" id="Admins"><AdminTable /></div>
-      <div className="tab-pane fade" id="BackWall">Backwall</div>
       </div>
       </div>
     
@@ -135,25 +132,27 @@ class ExtraRow extends Component{
 
       <tr>
 
+              <td >
+                
+                  <input id="day" placeholder="Day"></input>
+              </td>
+
               <td>
                 
-                  <input placeholder="Time"></input>
+                  <input id="time" placeholder="Time"></input>
               </td>
               <td>
-                <input placeholder="Visit"></input>
+                <input id="visit" placeholder="Visit"></input>
               </td>
               <td>
-                <input placeholder="Home"></input>
+                <input  id="home" placeholder="Home"></input>
               </td>
               <td>
-                <input placeholder="Umpire"></input>
+                <input id='umpire' placeholder="Umpire"></input>
               </td>
-               <td>
+               <td >
 
                <TechDropdown />
-                {/*<input list="techs" type="text" name="tech" className = "tech" placeholder="Tech" size="11"></input>
-                  <datalist id="techs">
-                  </datalist>*/}
 
               </td>
                <td>
@@ -162,11 +161,12 @@ class ExtraRow extends Component{
                 </div>
                 <div id="timePicker">
                   <Datetime dateFormat={false} input={true}/>
+                  <span id='hours'>##</span>
                 </div>
 
               </td>
-              <td>
-                <input  placeholder="Station "></input>
+              <td id="station">
+                <input  id="station" placeholder="Station "></input>
               </td>
 
               <td>

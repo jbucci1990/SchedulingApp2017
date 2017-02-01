@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Datetime from 'react-datetime';
 import ScheduleTable from './schedule/scheduletable';
+import NewDaySchedule from './schedule/dayschedule';
+
 import AddEmployees from './employees/addemployees';
 import FullEmployeeList from './employees/employee_list';
 import FinishedTabs from './navigation/tabs.js';
@@ -11,7 +13,7 @@ class NewSchedule extends Component{
 	render(){
 
 		return(
-			<div className="container-fluid">
+			<div id="schedule" className="container-fluid">
 
 			<div className="panel-group">
 
@@ -26,7 +28,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse1" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -42,7 +44,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse2" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -58,7 +60,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse3" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -74,7 +76,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse4" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -90,7 +92,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse5" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -106,7 +108,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse6" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>
@@ -122,7 +124,7 @@ class NewSchedule extends Component{
 					</div>
 
 					<div id="collapse7" className="panel-collapse collapse">
-					<ScheduleTable />
+					<NewDaySchedule />
 					</div>
 
 				</div>

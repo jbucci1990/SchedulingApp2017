@@ -17,10 +17,10 @@ class HourTotals extends Component{
 			<div  id="footer"className='footer navbar-fixed-bottom'>
 			<div className="panel panel-default">
 				<div className="panel-heading">
-				<h5>Hour Totals</h5>
+				<h5><a data-toggle="collapse" data-parent="#accordian" href="#footerCollapse">Hour Totals</a></h5>
 				</div>
 			
-			<div className='panel-body'>
+			<div  id="footerCollapse" className='panel-body'>
 			<div id="totalHours" className="col-md-4"><AdminHours /></div>
 			<div id="totalHours" className="col-md-4"><TechHours /></div>
 			<div id="totalHours" className="col-md-4"><BackWallHours /></div>

@@ -22,6 +22,23 @@ class AdminHours extends Component{
 							<td>Hours 1</td>
 
 						</tr>
+						<tr>
+							<td>Admin 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Admin 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Admin 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+
+
 					</tbody>
 
 				</table>

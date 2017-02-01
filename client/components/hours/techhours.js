@@ -22,6 +22,31 @@ class TechHours extends Component{
 							<td>Hours 1</td>
 
 						</tr>
+						<tr>
+							<td>Tech 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Tech 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Tech 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Tech 1</td>
+							<td>Hours 1</td>
+
+						</tr>
+						<tr>
+							<td>Tech 1</td>
+							<td>Hours 1</td>
+
+						</tr>
 					</tbody>
 
 				</table>
