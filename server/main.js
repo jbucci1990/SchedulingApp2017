@@ -3,6 +3,8 @@ import {EmployeeList} from '../imports/collections/employeelist';
 import {UploadedSchedule} from '../imports/collections/uploadedschedule';
 import {AdminList} from '../imports/collections/adminlist';
 import {FullTimeList} from '../imports/collections/fulltimestaff';
+import {EmployeeHours} from '../imports/collections/employeehours';
+
 import {Mongo} from 'meteor/mongo';
 import Excel from 'exceljs';
 
@@ -29,6 +31,11 @@ Meteor.startup(() => {
 	Meteor.publish('fulltimelist', function(){
 
 		return FullTimeList.find({});
+	});
+
+	Meteor.publish('employeehours', function(){
+
+		return EmployeeHours.find({});
 	});
 
 

@@ -6,11 +6,11 @@ import Datetime from 'react-datetime';
 import ScheduleTableRow from './scheduletablerow';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
-import AdminDropdown from './table_components/admindropdown';
+import TechDropdown from './table_components/techdropdown';
 
 
 
-class AdminScheduleTable extends Component{
+class BackWallScheduleTable extends Component{
 
   constructor(props){
 
@@ -47,13 +47,13 @@ class AdminScheduleTable extends Component{
 
     for (var i = 0; i < this.state.rows; i++){
 
-      children.push(<AdminExtraRow removeChild={this.deleteRow.bind(this)} number={i} key={i} />);
+      children.push(<BackWallExtraRow removeChild={this.deleteRow.bind(this)} number={i} key={i} />);
     };
 
     return(
-      <AdminFullTable addChild={this.onAddRow.bind(this)} >
+      <BackWallFullTable addChild={this.onAddRow.bind(this)} >
         {children}
-        </AdminFullTable>
+        </BackWallFullTable>
 
       
       );
@@ -68,14 +68,14 @@ class AdminScheduleTable extends Component{
   deleteRow(){
 
     
-    // console.log('hello');
+    console.log('hello');
     this.setState({rows: this.state.rows - 1})
     
   }
 
 }
 
-class AdminFullTable extends Component{
+class BackWallFullTable extends Component{
   render(){
 
     return(
@@ -83,11 +83,12 @@ class AdminFullTable extends Component{
     
     <div className="tab-content">
     <div id="Operator" className="table-responsive">
-        <table className="table table-condensed" id="adminTable">
+        <table className="table table-condensed" id="backWallTable">
           <thead>
                   <tr>
                     <th>Day</th>
-                    <th>Admin</th>
+                    <th>Operator</th>
+                    <th>Role</th>
                     <th>Shift</th>
                      
 
@@ -95,7 +96,7 @@ class AdminFullTable extends Component{
                 </thead>
 
                 <tbody className ="tbod">
-                 
+                  <BackWallExtraRow />
                   {this.props.children}
 
 
@@ -118,7 +119,7 @@ class AdminFullTable extends Component{
 
 }
 
-class AdminExtraRow extends Component{
+class BackWallExtraRow extends Component{
   render(){
 
     return(
@@ -132,9 +133,12 @@ class AdminExtraRow extends Component{
 
               
                <td >
-                <AdminDropdown />
-               
 
+               <TechDropdown />
+
+              </td>
+              <td>
+                <input placeholder="Role"></input>
               </td>
                <td>
                 <div id="timePicker">
@@ -164,4 +168,4 @@ export default createContainer(() => {
     return {schedule: UploadedSchedule.find({}).fetch()};
 
 
-  }, AdminScheduleTable);
+  }, BackWallScheduleTable);

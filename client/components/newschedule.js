@@ -3,14 +3,119 @@ import Datetime from 'react-datetime';
 import ScheduleTable from './schedule/scheduletable';
 import NewDaySchedule from './schedule/dayschedule';
 
+import {createContainer} from 'meteor/react-meteor-data';
+import {EmployeeList} from '../../imports/collections/employeelist';
+
+
 import AddEmployees from './employees/addemployees';
 import FullEmployeeList from './employees/employee_list';
 import FinishedTabs from './navigation/tabs.js';
 import HourTotals from './hours/hourtotals';
 
+
+import {OperatorSched} from '../../imports/collections/operatorschedule';
+
+
+import TestTable from './schedule/testtable';
+
 class NewSchedule extends Component{
 
+ componentDidMount(){
+
+ 	 console.log("MOUNTED");
+    
+    
+    $('.techdropdown').empty();
+    employeeArray = [];
+    this.props.employees.map(employee => {
+
+
+      employeeArray.push(employee.employeeName);
+    });
+    console.log(employeeArray);
+
+  
+    
+    employeeArray.map(employee => {
+      
+      
+      $('<option/>').val(employee).html(employee).appendTo('.techdropdown');
+    //  // console.log('did this print twice');
+
+    });
+   
+  }
+
+saveTable(){
+
+	
+
+	 var mondayTable = [];
+  $("#monday #mainTable tr").each(function () {
+      var myTr = [];
+     if (!$(this).children('td').children('div').hasClass("rdtCounters")){
+      $('td', this).each(function() {
+
+      	
+      	// tdDvis = $(this).children('div');
+      	// console.log(tdDvis);
+      	 if (!$(this).children('div').hasClass("rdtCounters")){
+      	 	
+          myTr.push($(this).find(":input").val());
+      }
+          // console.log(myTr);
+      });
+
+       // console.log(myTr);
+      myTr.splice(8,2);
+      mondayTable.push(myTr);
+      
+
+  }
+  });
+
+mondayTable.splice(0,1);
+
+
+
+
+
+OperatorSched.insert({
+	monday: mondayTable
+})
+mondayTable.forEach((list)=>
+	console.log(list))
+
+}
+	
+	
+	
+
 	render(){
+
+		 console.log("MOUNTED");
+    
+    
+    $('.techdropdown').empty();
+    employeeArray = [];
+    this.props.employees.map(employee => {
+
+
+      employeeArray.push(employee.employeeName);
+    });
+    console.log(employeeArray);
+
+  
+    
+    employeeArray.map(employee => {
+      
+      
+      $('<option/>').val(employee).html(employee).appendTo('.techdropdown');
+    //  // console.log('did this print twice');
+
+    });
+
+		
 
 		return(
 			<div id="schedule" className="container-fluid">
@@ -22,13 +127,14 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse1">
+						<a data-toggle="collapse" data-parent="#accordian" href="#monday">
 						Monday</a>
 						</h4>
 					</div>
 
-					<div id="collapse1" className="panel-collapse collapse">
-					<NewDaySchedule />
+					<div id="monday" className="panel-collapse collapse">
+					<NewDaySchedule key="Monday"/>
+					
 					</div>
 
 				</div>
@@ -38,12 +144,12 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse2">
+						<a data-toggle="collapse" data-parent="#accordian" href="#tuesday">
 						Tuesday</a>
 						</h4>
 					</div>
 
-					<div id="collapse2" className="panel-collapse collapse">
+					<div id="tuesday" className="panel-collapse collapse">
 					<NewDaySchedule />
 					</div>
 
@@ -54,12 +160,12 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse3">
+						<a data-toggle="collapse" data-parent="#accordian" href="#wednesday">
 						Wednesday</a>
 						</h4>
 					</div>
 
-					<div id="collapse3" className="panel-collapse collapse">
+					<div id="wednesday" className="panel-collapse collapse">
 					<NewDaySchedule />
 					</div>
 
@@ -70,12 +176,12 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse4">
+						<a data-toggle="collapse" data-parent="#accordian" href="#thursday">
 						Thursday</a>
 						</h4>
 					</div>
 
-					<div id="collapse4" className="panel-collapse collapse">
+					<div id="thursday" className="panel-collapse collapse">
 					<NewDaySchedule />
 					</div>
 
@@ -86,12 +192,12 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse5">
+						<a data-toggle="collapse" data-parent="#accordian" href="#friday">
 						Friday</a>
 						</h4>
 					</div>
 
-					<div id="collapse5" className="panel-collapse collapse">
+					<div id="friday" className="panel-collapse collapse">
 					<NewDaySchedule />
 					</div>
 
@@ -102,12 +208,12 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse6">
+						<a data-toggle="collapse" data-parent="#accordian" href="#saturday">
 						Saturday</a>
 						</h4>
 					</div>
 
-					<div id="collapse6" className="panel-collapse collapse">
+					<div id="saturday" className="panel-collapse collapse">
 					<NewDaySchedule />
 					</div>
 
@@ -118,13 +224,13 @@ class NewSchedule extends Component{
 					<div className="panel-heading">
 
 						<h4 className="panel-title">
-						<a data-toggle="collapse" data-parent="#accordian" href="#collapse7">
+						<a data-toggle="collapse" data-parent="#accordian" href="#sunday">
 						Sunday</a>
 						</h4>
 					</div>
 
-					<div id="collapse7" className="panel-collapse collapse">
-					<NewDaySchedule />
+					<div id="sunday" className="panel-collapse collapse">
+					<NewDaySchedule />	
 					</div>
 
 				</div>
@@ -134,10 +240,10 @@ class NewSchedule extends Component{
 			
 
 
-
+			 <button className="btn btn-primary" id="add" type="submit" onClick={this.saveTable}>Save</button>
 			</div>
 			<div>
-			<HourTotals />
+			
 
 
 			</div>
@@ -148,4 +254,10 @@ class NewSchedule extends Component{
 }
 
 
-export default NewSchedule;
+export default createContainer(() => {
+  Meteor.subscribe('employeelist');
+
+    return {employees: EmployeeList.find({}).fetch()};
+
+
+  }, NewSchedule);

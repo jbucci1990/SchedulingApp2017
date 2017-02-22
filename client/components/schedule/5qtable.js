@@ -6,11 +6,11 @@ import Datetime from 'react-datetime';
 import ScheduleTableRow from './scheduletablerow';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
-import AdminDropdown from './table_components/admindropdown';
+import TechDropdown from './table_components/techdropdown';
 
 
 
-class AdminScheduleTable extends Component{
+class FiveQScheduleTable extends Component{
 
   constructor(props){
 
@@ -47,13 +47,13 @@ class AdminScheduleTable extends Component{
 
     for (var i = 0; i < this.state.rows; i++){
 
-      children.push(<AdminExtraRow removeChild={this.deleteRow.bind(this)} number={i} key={i} />);
+      children.push(<FiveQExtraRow removeChild={this.deleteRow.bind(this)} number={i} key={i} />);
     };
 
     return(
-      <AdminFullTable addChild={this.onAddRow.bind(this)} >
+      <FiveQFullTable addChild={this.onAddRow.bind(this)} >
         {children}
-        </AdminFullTable>
+        </FiveQFullTable>
 
       
       );
@@ -75,7 +75,7 @@ class AdminScheduleTable extends Component{
 
 }
 
-class AdminFullTable extends Component{
+class FiveQFullTable extends Component{
   render(){
 
     return(
@@ -83,11 +83,12 @@ class AdminFullTable extends Component{
     
     <div className="tab-content">
     <div id="Operator" className="table-responsive">
-        <table className="table table-condensed" id="adminTable">
+        <table className="table table-condensed" id="5Qtable">
           <thead>
                   <tr>
                     <th>Day</th>
-                    <th>Admin</th>
+                    <th>Operator</th>
+                    <th>Role</th>
                     <th>Shift</th>
                      
 
@@ -95,7 +96,7 @@ class AdminFullTable extends Component{
                 </thead>
 
                 <tbody className ="tbod">
-                 
+                  <FiveQExtraRow />
                   {this.props.children}
 
 
@@ -118,7 +119,7 @@ class AdminFullTable extends Component{
 
 }
 
-class AdminExtraRow extends Component{
+class FiveQExtraRow extends Component{
   render(){
 
     return(
@@ -132,9 +133,12 @@ class AdminExtraRow extends Component{
 
               
                <td >
-                <AdminDropdown />
-               
 
+               <TechDropdown />
+
+              </td>
+              <td>
+                <input placeholder="Role"></input>
               </td>
                <td>
                 <div id="timePicker">
@@ -164,4 +168,4 @@ export default createContainer(() => {
     return {schedule: UploadedSchedule.find({}).fetch()};
 
 
-  }, AdminScheduleTable);
+  }, FiveQScheduleTable);

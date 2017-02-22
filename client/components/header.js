@@ -35,7 +35,7 @@ class Header extends Component{
 
 		fullDate = month + '/' + day + '/' + year;
 
-		console.log(newDate);
+		// console.log(newDate);
 
 		return(
 			<nav className="navbar navbar-default">

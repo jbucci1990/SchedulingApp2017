@@ -1,3 +1,4 @@
+
 .largebox{
 	border: black solid;
 	height: 500px;
@@ -24,7 +25,7 @@
 
 .list-group-item {
 
-	width: 100px;
+	width: 150px;
 }
 
 #dayHeader{
@@ -84,3 +85,4 @@
 
 	width: 100px;
 }
+

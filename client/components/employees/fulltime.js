@@ -10,12 +10,12 @@ class AddFullTime extends Component {
 
 		event.preventDefault();
 		const employee = document.getElementById('addfulltime').value
-		console.log(employee);
+		// console.log(employee);
 		const employeeForm = document.getElementById('addfulltimeForm');
 		
 		Meteor.call('fulltime.insert', employee);
 		employeeForm.reset();
-		console.log(this.props.fulltime);
+		// console.log(this.props.fulltime);
 
 		
 
@@ -38,7 +38,7 @@ class AddFullTime extends Component {
 
 			employeeArray.push(employee.fulltimeName);
 		});
-		console.log(employeeArray);
+		// console.log(employeeArray);
 
 	
 

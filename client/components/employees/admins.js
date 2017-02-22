@@ -10,12 +10,12 @@ class AddAdmins extends Component {
 
 		event.preventDefault();
 		const employee = document.getElementById('addadmin').value
-		console.log(employee);
+		// console.log(employee);
 		const employeeForm = document.getElementById('addAdminForm');
 		
 		Meteor.call('admins.insert', employee);
 		employeeForm.reset();
-		console.log(this.props.admins);
+		// console.log(this.props.admins);
 
 		
 
@@ -38,7 +38,7 @@ class AddAdmins extends Component {
 
 			employeeArray.push(employee.adminName);
 		});
-		console.log(employeeArray);
+		// console.log(employeeArray);
 
 	
 

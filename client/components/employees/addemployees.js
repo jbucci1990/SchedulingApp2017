@@ -13,7 +13,27 @@ import FullStaffList from './fulltime_list';
 class AddEmployees extends Component {
 
 
-	CreateDropdown(){
+	componentDidUpdate(){
+
+		$('#employeeDropdown').empty();
+		// console.log(this.props.employees);
+		employeeArray = [];
+		console.log(this.props.employees);
+		this.props.employees.map(employee => {
+
+
+			employeeArray.push(employee.employeeName);
+		});
+		// console.log(employeeArray);
+
+	
+
+		employeeArray.map(employee => {
+
+			$('<option/>').val(employee).html(employee).appendTo('#employeeDropdown');
+			// console.log('did this print twice');
+
+		});
 
 		
 
@@ -30,7 +50,7 @@ class AddEmployees extends Component {
 		
 		Meteor.call('employees.insert', employee);
 		employeeForm.reset();
-		console.log(this.props.employees);
+		// console.log(this.props.employees);
 
 		
 
@@ -48,24 +68,7 @@ class AddEmployees extends Component {
 		
 
 	render(){
-		$('#employeeDropdown').empty();
-		// console.log(this.props.employees);
-		employeeArray = [];
-		this.props.employees.map(employee => {
-
-
-			employeeArray.push(employee.employeeName);
-		});
-		// console.log(employeeArray);
-
-	
-
-		employeeArray.map(employee => {
-
-			$('<option/>').val(employee).html(employee).appendTo('#employeeDropdown');
-			// console.log('did this print twice');
-
-		});
+		
 
 		
 	
