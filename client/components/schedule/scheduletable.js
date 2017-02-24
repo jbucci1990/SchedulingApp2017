@@ -6,6 +6,8 @@ import moment from 'moment';
 
 import {EmployeeList} from '../../../imports/collections/employeelist';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
+import {EmployeeHours} from '../../../imports/collections/employeelist';
+
 
 import TechDropdown from './table_components/techdropdown';
 
@@ -47,7 +49,7 @@ class ScheduleTable extends Component{
 
 	render(){
     // console.log(this.state.rows);
-     console.log(this.props.employees); 
+     // console.log(this.props.employees); 
     const children = [];
 
     for (var i = 0; i < this.state.rows; i++){
@@ -143,6 +145,18 @@ class FullTable extends Component{
 }
 
 class ExtraRow extends Component{
+  componentDidUpdate(){
+
+    // console.log('updated');
+    var tech = this.state.tech;
+    var hours = this.state.shiftHours;
+
+    var nameHours = {name: tech, hours: hours}
+
+    Meteor.call('hours.insert', nameHours);
+
+    // console.log('this is the tech  ', this.state.tech, "  and this is his hours: ", this.state.shiftHours)
+  }
 
   constructor(props){
 
@@ -153,6 +167,7 @@ class ExtraRow extends Component{
       visit: "", 
       home: "", 
       umpire: "", 
+      tech: "",
       station: "",
       timeOne: "", 
       timeTwo: "",
@@ -169,7 +184,7 @@ class ExtraRow extends Component{
   changetimeValueOne(value){
 
 
-    console.log("this is timeOne",  value);
+    // console.log("this is timeOne",  value);
     this.setState({
       timeOne: value
     });
@@ -179,10 +194,10 @@ class ExtraRow extends Component{
      //  }
     var duration = moment.duration(this.state.timeTwo.diff(value));
     var hours = duration.asHours();
-    console.log("difference =", hours);
+    // console.log("difference =", hours);
     if(hours < 0){
 
-      console.log('this is a minus!');
+      // console.log('this is a minus!');
       hours = hours + 24;
 
     
@@ -194,7 +209,7 @@ class ExtraRow extends Component{
 
   }
   changetimeValueTwo(value){
-    console.log("this is timetwo:", value);
+    // console.log("this is timetwo:", value);
     this.setState({
       timeTwo: value
     });
@@ -205,11 +220,11 @@ class ExtraRow extends Component{
 
     var duration = moment.duration(value.diff(this.state.timeOne));
     var hours = duration.asHours();
-    console.log("difference =", hours);
+    // console.log("difference =", hours);
 
      if(hours < 0){
 
-      console.log('this is a minus!');
+      // console.log('this is a minus!');
       hours = hours + 24;
 
       
@@ -221,6 +236,14 @@ class ExtraRow extends Component{
 
 
 
+
+  }
+
+  setTech(tech){
+
+    this.setState({
+      tech: tech
+    });
 
   }
   handleChange(event){
@@ -251,6 +274,10 @@ class ExtraRow extends Component{
     const homeValue = this.refs.home.value;
     const umpireValue = this.refs.umpire.value;
     const stationValue = this.refs.station.value;
+    const techniciain = this.refs.techdropdown;
+    // console.log(techniciain);
+    // console.log($('#techdropdown option:selected').text());
+    // console.log(this.state.tech);
     
 
 
@@ -292,7 +319,7 @@ class ExtraRow extends Component{
               </td>
                <td id="techName" >
 
-               <TechDropdown hours = {this.state.shiftHours} />
+               <TechDropdown getTechName = { tech => this.setTech(tech)} hours = {this.state.shiftHours} />
 
               </td>
                <td>

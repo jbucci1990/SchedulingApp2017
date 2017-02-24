@@ -3,7 +3,6 @@ import {createContainer} from 'meteor/react-meteor-data';
 import Datetime from 'react-datetime';
 
 
-import ScheduleTableRow from './scheduletablerow';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
 
 import TechDropdown from './table_components/techdropdown';

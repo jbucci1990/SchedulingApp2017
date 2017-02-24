@@ -5,13 +5,28 @@ import {EmployeeHours} from '../../../../imports/collections/employeelist';
 
 class TechDropdown extends Component{
 
-	componentDidUpdate(){
+	componentDidMount(){
+		$('.techdropdown').empty();
+    $('<option/>').val('').html('').appendTo('.techdropdown');
+    employeeArray = [];
+    this.props.employees.map(employee => {
 
-		// console.log(this.state.tech);
-		// console.log(this.props.hours);	
-		
 
+      employeeArray.push(employee.employeeName);
+    });
+    // console.log(employeeArray);
+
+  
+    
+    employeeArray.map(employee => {
+      
+      
+      $('<option/>').val(employee).html(employee).appendTo('.techdropdown');
+    //  // console.log('did this print twice');
+
+    });
 	}
+
 	
 
 	
@@ -33,6 +48,8 @@ class TechDropdown extends Component{
 
 
 	}
+
+	
 	handleChange(event){
 
 		// var hours = this.props.hours
@@ -50,15 +67,21 @@ class TechDropdown extends Component{
 		// 	selectedTech.push(person);
 		// });
 		// 	// console.log(selectedTech);
-		// this.setState({tech:selectedTech });
+		
 		var target = event.target;
 		var hours = this.props.hours;
-		var nameHours = {name: target.value, hours: hours}
+		var tech = target.value;
+		var nameHours = {name: tech, hours: hours}
+
+		this.setState({tech:tech });
 		
 
 		// console.log(nameHours);
 
-		Meteor.call('hours.insert', nameHours);
+
+		// Meteor.call('hours.insert', nameHours);
+
+		this.props.getTechName(tech);
 
 
 
@@ -76,6 +99,8 @@ class TechDropdown extends Component{
 	}
 
 	render(){
+		
+
 		
 		
 	
@@ -104,8 +129,8 @@ class TechDropdown extends Component{
 		return(
 
 			<div>
-				<select id="techdropdown" className="techdropdown" onChange={this.handleChange}>
-					<option>"kitten"</option>
+				<select placeholder="Choose Tech" id="techdropdown" className="techdropdown" onChange={this.handleChange}>
+					
 				</select>
 			</div>
 

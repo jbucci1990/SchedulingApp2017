@@ -2,13 +2,34 @@ import {Mongo} from 'meteor/mongo';
 
 Meteor.methods({
 
+	
 	'hours.insert': function(employee){
 
-		
+		if (employee.name != ""){
 
-		console.log(employee);
-		console.log(employee.name);
-		console.log(employee.hours);
+		return EmployeeHours.insert({
+
+			name: employee.name, 
+			hours: employee.hours
+		});
+
+		}
+
+		// for(object in techHoursObject){
+		// 	if (object.name != employee.name){
+		// 		var nameObject = {name: employee.name, hours: employee.hours};
+		// 		console.log(nameObject);
+		// 		techHoursObject.push(nameObject)
+		// 	}
+		// }
+
+		// var nameObject = {name: employee.name, hours: employee.hours};
+		// console.log(nameObject);
+		// this.techHoursObject.push(nameObject)
+
+
+
+		console.log(techHoursObject);
 		
 		
 

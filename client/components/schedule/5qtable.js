@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {createContainer} from 'meteor/react-meteor-data';
 import Datetime from 'react-datetime';
+import moment from 'moment';
 
 
-import ScheduleTableRow from './scheduletablerow';
+import {EmployeeList} from '../../../imports/collections/employeelist';
 import {UploadedSchedule} from '../../../imports/collections/uploadedschedule';
+import {EmployeeHours} from '../../../imports/collections/employeelist';
 
 import TechDropdown from './table_components/techdropdown';
 
@@ -51,7 +53,7 @@ class FiveQScheduleTable extends Component{
     };
 
     return(
-      <FiveQFullTable addChild={this.onAddRow.bind(this)} >
+      <FiveQFullTable dropdown={this.props.employees} addChild={this.onAddRow.bind(this)} >
         {children}
         </FiveQFullTable>
 
@@ -120,6 +122,128 @@ class FiveQFullTable extends Component{
 }
 
 class FiveQExtraRow extends Component{
+
+  componentDidUpdate(){
+
+    // console.log('updated');
+    var tech = this.state.tech;
+    var hours = this.state.shiftHours;
+
+    var nameHours = {name: tech, hours: hours}
+
+    Meteor.call('hours.insert', nameHours);
+
+    // console.log('this is the tech  ', this.state.tech, "  and this is his hours: ", this.state.shiftHours)
+  }
+
+   constructor(props){
+
+    super(props);
+    this.state = {
+      day: "",
+      time: "", 
+      visit: "", 
+      home: "", 
+      umpire: "", 
+      tech: "",
+      station: "",
+      timeOne: "", 
+      timeTwo: "",
+      shiftHours: 0
+
+
+        };
+    // this.changetimeValueOne = this.changetimeValueOne.bind(this);
+    // this.changetimeValueTwo = this.changetimeValueTwo.bind(this);
+    this.handleChange= this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  changetimeValueOne(value){
+
+
+    console.log("this is timeOne",  value);
+    this.setState({
+      timeOne: value
+    });
+
+     // if (value.format("a") === "pm" && this.state.timeTwo.format("a") === "am") {
+     //  this.state.timeTwo.add(1, 'day');
+     //  }
+    var duration = moment.duration(this.state.timeTwo.diff(value));
+    var hours = duration.asHours();
+    console.log("difference =", hours);
+    if(hours < 0){
+
+      console.log('this is a minus!');
+      hours = hours + 24;
+
+    
+    }
+
+    this.setState({
+      shiftHours: hours
+    });
+
+  }
+  changetimeValueTwo(value){
+    console.log("this is timetwo:", value);
+    this.setState({
+      timeTwo: value
+    });
+
+     // if (value.format("a") === "am" && this.state.timeTwo.format("a") === "pm") {
+     //  this.state.timeOne.add(1, 'day');
+     //  }
+
+    var duration = moment.duration(value.diff(this.state.timeOne));
+    var hours = duration.asHours();
+    console.log("difference =", hours);
+
+     if(hours < 0){
+
+      console.log('this is a minus!');
+      hours = hours + 24;
+
+      
+    }
+
+    this.setState({
+      shiftHours: hours
+    });
+
+
+
+
+  }
+
+  setTech(tech){
+
+    this.setState({
+      tech: tech
+    });
+
+  }
+  handleChange(event){
+
+    const target = event.target;
+    const value = target.value; 
+    const name = target.name;
+    
+    this.setState({
+      [name]: value
+    });
+
+
+
+    
+
+  }
+
+  handleSubmit(event){
+    
+    event.preventDefault();
+  }
   render(){
 
     return(
@@ -128,13 +252,14 @@ class FiveQExtraRow extends Component{
 
               <td >
                 
-                  <input id="day" placeholder="Day"></input>
+                   <input  ref="day" name="day" value={this.state.day} onChange ={this.handleChange} id="day" placeholder="Day"></input>
+                
               </td>
 
               
-               <td >
+              <td id="techName" >
 
-               <TechDropdown />
+               <TechDropdown getTechName = { tech => this.setTech(tech)} hours = {this.state.shiftHours} />
 
               </td>
               <td>
@@ -142,11 +267,11 @@ class FiveQExtraRow extends Component{
               </td>
                <td>
                 <div id="timePicker">
-                  <Datetime dateFormat={false} input={true}/>
+                  <Datetime  ref="starttime"  onBlur={this.changetimeValueOne.bind(this)} dateFormat={false}  input={true} inputProps={{placeholder:'start'}}/>
                 </div>
                 <div id="timePicker">
-                  <Datetime dateFormat={false} input={true}/>
-                  <span id='hours'>##</span>
+                  <Datetime ref="endtime"  onBlur={this.changetimeValueTwo.bind(this)} dateFormat={false}  input={true} inputProps={{placeholder:'end'}}/>
+                  <p id='hours' className="hours">{this.state.shiftHours}</p>
                 </div>
 
               </td>
@@ -163,9 +288,9 @@ class FiveQExtraRow extends Component{
 }
 
 export default createContainer(() => {
-  Meteor.subscribe('uploadedschedule');
+   Meteor.subscribe('employeelist');
 
-    return {schedule: UploadedSchedule.find({}).fetch()};
+    return {employees: EmployeeList.find({}).fetch()};
 
 
   }, FiveQScheduleTable);
